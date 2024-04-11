@@ -36,3 +36,25 @@ Once the application is running:
 4. Choose a file using the file input field.
 5. Click the submit button.
 
+# Architecture Overview
+
+## Frontend Page
+![Front End](img/Front-end%201.png)
+## AWS Infrastructure
+![Infra](img/arc.PNG)
+### S3 Bucket
+Initially, the S3 bucket contains `server.js`, which is executed when the EC2 instance starts via Lambda.
+![Alt Text](img/S3%20intial.png)
+### Lambda and EC2 Interaction
+Upon clicking submit, the following process is initiated:
+![Alt Text](img/S3%20Intermediate.png)
+### DynamoDB Usage
+Data is stored and retrieved from DynamoDB. Images below depict the DynamoDB state at the start and end of the application.
+![Alt Text](img/DynamoDB%20Intial.png)
+### S3 Bucket at the End
+The S3 bucket reflects the final state after the process completes.
+![Alt Text](img/S3%20Final.png)
+## Server-side Code
+
+The `server.js` code, available in the `server-side-code` folder, retrieves data from DynamoDB, downloads the input file from S3, appends input text, uploads the file back to S3, and updates the item by adding the `output_file_path` variable.
+![Alt Text](img/DynamoDB%20Final.png)
